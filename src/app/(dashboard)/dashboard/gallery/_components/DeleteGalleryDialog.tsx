@@ -1,0 +1,79 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { deleteGallery } from "@/services/gallery";
+import { showErrorToast, showSuccessToast } from "@/utils/toastMessage";
+import { Trash2 } from "lucide-react";
+import { useState, useTransition } from "react";
+
+const DeleteGalleryDialog = ({ id }: { id?: string }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isPending, startTransition] = useTransition();
+
+    const handleDelete = async () => {
+        startTransition(async () => {
+            const result = await deleteGallery(id);
+
+            if (result.statusCode === 200) {
+                setIsOpen(false);
+                showSuccessToast(result.message);
+            } else {
+                setIsOpen(false);
+                showErrorToast(result.message);
+            }
+        });
+    };
+
+    return (
+        <div>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogTrigger asChild>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 w-8 p-0 text-red-400 cursor-pointer hover:text-red-600 bg-[#232326] border border-[#232326]"
+                    >
+                        <Trash2 size={18} />
+                    </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-[#18181b] text-white border border-[#232326]">
+                    <DialogHeader>
+                        <DialogTitle className="text-white">
+                            Are you absolutely sure?
+                        </DialogTitle>
+                        <DialogDescription className="text-gray-300">
+                            This action cannot be undone. This will permanently delete this
+                            blog and remove your data from our servers.
+                        </DialogDescription>
+                        <div className="flex justify-end space-x-2 mt-4">
+                            <DialogClose asChild>
+                                <Button className="bg-[#232326] text-gray-200 hover:bg-[#2c2c31] border border-[#232326] cursor-pointer">
+                                    Cancel
+                                </Button>
+                            </DialogClose>
+
+                            <Button
+                                onClick={handleDelete}
+                                disabled={isPending}
+                                className="bg-red-600 text-white hover:bg-red-700 border border-red-600 cursor-pointer"
+                            >
+                                {isPending ? "Deleting..." : "Delete"}
+                            </Button>
+                        </div>
+                    </DialogHeader>
+                </DialogContent>
+            </Dialog>
+        </div>
+    );
+};
+
+export default DeleteGalleryDialog;
