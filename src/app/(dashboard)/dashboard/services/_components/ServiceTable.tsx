@@ -41,7 +41,8 @@ const ServiceTable = ({ servicesData = [] }: { servicesData: Service[] }) => {
   return (
     <>
       <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <table className="w-full">
+        <div className="w-full overflow-x-auto">
+          <table className="w-full min-w-[760px]">
           <thead>
             <tr className="border-b border-gray-100">
               <th className="text-left py-4 px-6 font-semibold text-gray-700">SN</th>
@@ -105,7 +106,8 @@ const ServiceTable = ({ servicesData = [] }: { servicesData: Service[] }) => {
               ))
             )}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </>
   );

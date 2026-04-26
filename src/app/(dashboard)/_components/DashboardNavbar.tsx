@@ -101,7 +101,7 @@ export function Navbar({ adminData }: NavbarProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem className="cursor-pointer">
-              <Link href={`/dashboard/general-setting`}>Settings</Link>
+              <Link href={`/dashboard/update-profile`}>Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">

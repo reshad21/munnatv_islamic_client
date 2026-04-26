@@ -34,8 +34,8 @@ const RoleTable = async ({ roles }: { roles: TRole[] }) => {
           slogan={`You have received ${roles.length} roles`}
         />
       </div>
-      <div>
-        <Table>
+      <div className="w-full overflow-x-auto">
+        <Table className="min-w-[900px]">
           <TableCaption>
             {roles.length === 0 ? (
               <p className="text-gray-500">No roles found.</p>

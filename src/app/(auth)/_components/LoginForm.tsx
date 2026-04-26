@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { login } from "@/services/auth";
 import { showErrorToast, showSuccessToast } from "@/utils/toastMessage";
-import { Lock, Mail, Loader2, User } from "lucide-react";
+import { Lock, Mail, Loader2, User, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { FieldValues, SubmitHandler, useForm, Controller } from "react-hook-form";
@@ -14,6 +14,7 @@ import footerRightImage from "../../../../public/Image (2).png";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const form = useForm({
@@ -80,10 +81,18 @@ const LoginForm = () => {
                   <Lock className="text-gray-400 mr-3" size={20} />
                   <input
                     {...field}
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="flex-1 outline-none bg-transparent text-gray-700 placeholder-gray-400 text-sm"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="ml-2 text-gray-400 hover:text-gray-600 transition-colors"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
                 </div>
               )}
             />
