@@ -2,12 +2,13 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/constant/dashboardNavbar.constant";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
+import { logout } from "@/services/auth";
 
 interface SidebarProps {
   adminData?: any;
@@ -17,6 +18,7 @@ interface SidebarProps {
 
 export function Sidebar({ adminData, isMobile, onNavItemClick }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   // Extract allowed paths from roleFeature and normalize them
   const allowedPaths: string[] =
@@ -65,6 +67,13 @@ export function Sidebar({ adminData, isMobile, onNavItemClick }: SidebarProps) {
 
   const handleDropdownClick = (label: string) => {
     setOpenDropdown((prev) => (prev === label ? null : label));
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    onNavItemClick?.();
+    router.push("/login");
+    router.refresh();
   };
 
   return (
@@ -141,6 +150,22 @@ export function Sidebar({ adminData, isMobile, onNavItemClick }: SidebarProps) {
                   );
                 }
                 // Regular menu item
+                if (item.isLogout) {
+                  return (
+                    <button
+                      key={item.href}
+                      type="button"
+                      className={cn(
+                        "flex items-center gap-3 rounded-3xl px-3 py-2 text-sm font-medium transition-colors hover:bg-brand/10 hover:text-brand text-muted-foreground"
+                      )}
+                      onClick={handleLogout}
+                    >
+                      {Icon && <Icon className="h-4 w-4" />}
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                }
+
                 return (
                   <Link
                     key={item.href}
