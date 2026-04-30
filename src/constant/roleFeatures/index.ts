@@ -13,4 +13,5 @@ export const RoleFeatures: TRoleFeature[] = [
     { name: 'Packages', path: 'packages', index: 10, isChecked: false },
     { name: 'Gallery', path: 'gallery', index: 11, isChecked: false },
     { name: 'Reviews', path: 'reviews', index: 12, isChecked: false },
+    { name: 'Video Gallery', path: 'video-gallery', index: 13, isChecked: false },
 ];

@@ -1,0 +1,25 @@
+import React from 'react'
+import { DashboardWrapper } from '../../_components/DashboardWrapper'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import CreateVideoGalleryForm from './_components/CreateVideoGalleryForm'
+
+const CreateVideoGalleryPage = () => {
+  return (
+    <DashboardWrapper>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">Video Gallery Create</h2>
+        <Link
+          href="/dashboard/video-gallery"
+          className="flex items-center gap-2 bg-[#0f3d3e] text-white px-5 py-2.5 rounded-full hover:bg-[#0a2e2f] transition-colors cursor-pointer"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">Back</span>
+        </Link>
+      </div>
+      <CreateVideoGalleryForm/>
+    </DashboardWrapper>
+  )
+}
+
+export default CreateVideoGalleryPage
