@@ -10,8 +10,7 @@ const BlogHeader = () => {
                 </span>
             </div>
             <h2 className="text-3xl md:text-3xl font-bold text-[#0f3d3e] text-center leading-tight">
-                আপনার পবিত্র যাত্রার জন্য নির্দেশিকা, গল্প{" "}
-                <br className="hidden md:block" /> এবং অনুপ্রেরণা
+                Munnatv-তে স্বাগতম | ইসলামিক জ্ঞানের আলো
             </h2>
         </div>
     );

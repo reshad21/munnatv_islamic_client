@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import { getContactUs } from "@/services/contactus";
 import React from "react";
-import Link from "next/link"; // Fix: Import from next/link
+import Link from "next/link";
+import Image from "next/image";
 import siteLogo from "../../../../../public/hilful_fujul.png";
 
 const DynamicLogo = async () => {
@@ -16,11 +16,13 @@ const DynamicLogo = async () => {
   return (
     <div className="flex items-center gap-2">
       <Link href="/">
-        <div className="w-12 h-12 rounded-full border-2 border-[#0E595C] overflow-hidden">
-          <img
+        <div className="w-12 h-12 rounded-full border-2 border-[#0E595C] overflow-hidden relative">
+          <Image
             src={imageUrl}
             alt="Logo"
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover"
+            unoptimized
           />
         </div>
       </Link>

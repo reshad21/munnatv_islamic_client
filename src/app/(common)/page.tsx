@@ -12,6 +12,8 @@ import { getReviews } from "@/services/review";
 import BlogHeader from "./blogs/_components/BlogHeader";
 import BlogSection from "./blogs/_components/BlogSection";
 import { getBlogs } from "@/services/blog";
+import { getVideoGalleries } from "@/services/video-gallery";
+import VideoGallerySection from "./videoGallery/_components/VideoGallerySection";
 
 export const dynamic = "force-dynamic";
 
@@ -46,9 +48,11 @@ const Home = async (props: {
   const reviews = reviewResponse?.data?.data || [];
   const blogResponse = await getBlogs([]);
   const blogsData = (blogResponse?.data?.data || []).slice(0, 3);
+  const videoData = await getVideoGalleries(query);
   return (
     <div>
       <HomepageHero />
+      <VideoGallerySection videos={videoData?.data?.data} />
       <AboutUs />
       <ServiceHeader />
       <HomeService searchParams={props.searchParams} />
